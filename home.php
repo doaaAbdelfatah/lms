@@ -1,3 +1,15 @@
+<?php 
+  session_start();
+  require_once('classes/User.php');
+  if (empty($_SESSION["user"])) {
+    header("location:index.php?error=login_first");
+  }else{
+    $user =  unserialize($_SESSION["user"]);
+    // var_dump($_SESSION["user"] );
+    // var_dump(  $user );
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,8 +72,7 @@
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
-      </li>
-      
+      </li>      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -82,7 +93,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?= $user->name ?></a>
         </div>
       </div>
 
@@ -101,7 +112,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="index.html" class="nav-link">
+                <a href="index.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard v1</p>
                 </a>
@@ -119,7 +130,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="index.html" class="nav-link">
+                <a href="index.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard v1</p>
                 </a>
@@ -180,7 +191,7 @@
                 </div>
               </div>
               <div class="card-body">
-                Start creating your amazing application!
+              <?php  var_dump($user); ?>
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
