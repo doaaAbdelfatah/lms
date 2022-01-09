@@ -1,5 +1,8 @@
 <?php 
 session_start();
+if (!empty($_POST["email"]) && !empty($_POST["pw"])){
+
+
 $email = htmlspecialchars( trim($_POST["email"]));
 $pw = $_POST["pw"];
 
@@ -15,5 +18,8 @@ if (!empty($user)){
     header("location:home.php");
 }else{
     header("location:index.php?error=invalid_login");
+}
 
+}else{
+    header("location:index.php?error=empty");
 }

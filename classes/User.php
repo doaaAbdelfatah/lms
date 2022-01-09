@@ -1,6 +1,6 @@
 <?php
 
-    abstract class User{
+    class User{
 
         protected $id ;
         public $name ;
@@ -105,19 +105,42 @@
             $this->role ="it";            
         }
 
-        public function create_user(User $user){   
+        public function create_user(User $user){ 
+
             $name  =$user->name;
             $email  =$user->email;
             $role  =$user->role;
-            $did  = (empty($user->deprtment_id))?null : $user->deprtment_id;
+            $pw = md5("123456");
+            $did  = (empty($user->deprtment_id))? "null" : $user->deprtment_id;
 
-            $qry ="insert into users (name ,email ,role,department_id ,created_by) 
-            values ('$name' ,'$email' , '$role' , $did ," . $this->id.")";
-            require_once("../config.php");
+            $qry ="insert into users (name ,email ,password ,role,department_id ,created_by) 
+            values ('$name' ,'$email' ,'$pw', '$role' , $did ," . $this->id.")";
+            require_once("config.php");
             $cn =mysqli_connect(DB_HOST,DB_USER_NAME,DB_USER_PW,DB_NAME);
             $rslt = mysqli_query($cn  ,$qry) ;
-            var_dump($rslt);
+            // echo mysqli_error($cn);
+            // var_dump($rslt);
             mysqli_close($cn);
+            return $rslt;
+        }
+
+        public function delete_user($id){
+            $qry ="delete from users where id=$id";
+            require_once("config.php");
+            $cn =mysqli_connect(DB_HOST,DB_USER_NAME,DB_USER_PW,DB_NAME);
+            $rslt = mysqli_query($cn  ,$qry) ;
+            echo mysqli_error($cn);
+            // var_dump($rslt);
+            mysqli_close($cn);
+            return $rslt;
+        }
+        public  function list_all_users(){
+            require_once("config.php");
+            $cn =mysqli_connect(DB_HOST,DB_USER_NAME,DB_USER_PW,DB_NAME);
+            $rslt = mysqli_query($cn  ,"select u.* , c.name created_by_name from users u left join users c on (u.created_by =c.id)") ;
+            $data =mysqli_fetch_all($rslt ,MYSQLI_ASSOC);
+            mysqli_close($cn);
+            return $data;
         }
 
     }
