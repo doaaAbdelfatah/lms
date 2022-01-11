@@ -103,7 +103,7 @@
           <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?= $user->name ?></a>
+          <a href="#" class="d-block"><?= $user->name ?> - (<?= $user->role ?> ) </a>
         </div>
       </div>
 
@@ -116,8 +116,7 @@
             <a href="home.php" class="nav-link <?= ($page_name =="home") ?  "active" :"" ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
-              
+                Dashboard              
               </p>
             </a>
            
@@ -136,9 +135,86 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="users.php" class="nav-link active">
+                <a href="users.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Users</p>
+                </a>
+              </li>               
+              <li class="nav-item">
+                <a href="student_tuition.php" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Didn't Pay Tuition</p>
+                </a>
+              </li>             
+            </ul>
+          </li>
+
+          <li class="nav-item <?= ($page_name =="courses") ? "menu-is-opening menu-open" :"" ?>">   
+          <!-- menu-is-opening menu-open -->
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-codepen"></i>
+              <p>
+                Courses
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="courses.php" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Courses</p>
+                </a>
+              </li>              
+              <li class="nav-item">
+                <a href="courses_details.php" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Courses Details</p>
+                </a>
+              </li>             
+            </ul>
+          </li>
+
+
+        <?php
+          }       
+          elseif ($user->role == "profosser")  {
+            ?>
+          <li class="nav-item <?= ($page_name =="courses") ? "menu-is-opening menu-open" :"" ?>">   
+          <!-- menu-is-opening menu-open -->
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-codepen"></i>
+              <p>
+                My Data
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="courses_prof.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Courses</p>
+                </a>
+              </li>             
+            </ul>
+          </li>
+
+        <?php
+          }elseif ($user->role == "student")  {
+            ?>
+          <li class="nav-item <?= ($page_name =="courses") ? "menu-is-opening menu-open" :"" ?>">   
+          <!-- menu-is-opening menu-open -->
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-codepen"></i>
+              <p>
+                Courses
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="courses.php" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Available Courses </p>
                 </a>
               </li>             
             </ul>
@@ -147,8 +223,6 @@
         <?php
           }
         ?>
-          
-        
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

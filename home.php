@@ -43,7 +43,7 @@
                 </div>
               </div>
               <div class="card-body">
-              <?php  var_dump($user); ?>
+             
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
